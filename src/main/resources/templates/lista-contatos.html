@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Minha Agenda</title>
+</head>
+<body>
+    <h1>Meus Contatos</h1>
+    <a th:href="@{/contatos/novo}">Novo Contato</a>
+    <a th:href="@{/logout}">Sair</a>
+    <p th:if="${mensagem}" th:text="${mensagem}" style="color: green;"></p>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Sobrenome</th>
+                <th>Data de Nascimento</th>
+                <th>Telefone(s)</th>
+                <th>Grau de Parentesco</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="contato : ${contatos}">
+                <td th:text="${contato.nome}"></td>
+                <td th:text="${contato.sobrenome}"></td>
+                <td th:text="${contato.dataNascimento}"></td>
+                <td>
+                    <ul>
+                        <li th:each="tel : ${contato.telefones}" th:text="${tel}"></li>
+                    </ul>
+                </td>
+                <td th:text="${contato.grauParentesco}"></td>
+                <td>
+                    <a th:href="@{/contatos/editar/{id}(id=${contato.id})}">Editar</a> |
+                    <a th:href="@{/contatos/deletar/{id}(id=${contato.id})}" onclick="return confirm('Tem certeza que deseja deletar este contato?');">Deletar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro/Edição de Contato</title>
+</head>
+<body>
+    <h1 th:text="${contato.id == null ? 'Novo Contato' : 'Editar Contato'}"></h1>
+    <form th:action="@{/contatos/salvar}" th:object="${contato}" method="post">
+        <input type="hidden" th:field="*{id}">
+        <label for="nome">Nome *:</label>
+        <input type="text" id="nome" th:field="*{nome}" required><br><br>
+        <label for="sobrenome">Sobrenome *:</label>
+        <input type="text" id="sobrenome" th:field="*{sobrenome}" required><br><br>
+        <label for="dataNascimento">Data de Nascimento *:</label>
+        <input type="date" id="dataNascimento" th:field="*{dataNascimento}" required><br><br>
+        <label for="grauParentesco">Grau de Parentesco:</label>
+        <input type="text" id="grauParentesco" th:field="*{grauParentesco}"><br><br>
+        
+        <div id="telefones-container">
+            <div th:each="tel, stat : *{telefones}">
+                <label th:for="${'telefone-' + stat.index}">Telefone *:</label>
+                <input type="text" th:id="${'telefone-' + stat.index}" th:field="*{telefones[__${stat.index}__]}" required>
+            </div>
+            <button type="button" onclick="adicionarTelefone()">Adicionar Telefone</button>
+        </div>
+        
+        <br>
+        <button type="submit">Salvar</button>
+    </form>
+    <a th:href="@{/contatos}">Voltar para a lista</a>
+
+    <script>
+        function adicionarTelefone() {
+            var container = document.getElementById('telefones-container');
+            var input = document.createElement('input');
+            input.type = 'text';
+            input.name = 'telefones';
+            input.required = true;
+            container.appendChild(input);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-AgendaTelefonicaApplication<agenda-telefonica>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.agenda.agendatelefonica.AgendaTelefonicaApplication",
+            "projectName": "agenda-telefonica",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

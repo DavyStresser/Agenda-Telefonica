@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - Agenda Telefônica</title>
+</head>
+<body>
+    <h1>Login</h1>
+    <p th:if="${mensagem}" th:text="${mensagem}" style="color: red;"></p>
+    <form th:action="@{/login}" th:object="${usuario}" method="post">
+        <label for="email">Email:</label>
+        <input type="text" id="email" th:field="*{email}" required><br><br>
+        <label for="senha">Senha:</label>
+        <input type="password" id="senha" th:field="*{senha}" required><br><br>
+        <button type="submit">Entrar</button>
+    </form>
+    <br>
+    <a th:href="@{/cadastro}">Ainda não tem uma conta? Cadastre-se.</a>
+</body>
+</html>
